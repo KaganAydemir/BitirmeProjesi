@@ -2,20 +2,20 @@
 {% block content %}
 <div class="container">
     <div class="jumbotron">
-        <div class="container mb-2 row">
-            <div class="col-md-6">
+        <div class="container mb-6 row">
+            <div class="col-md-12 col-lg-10">
                 <h2><i>Gerçek Zamanlı Obje Tanıma</i></h2>
                 {% if setting.stream_on %}
                 <div id="counter"></div>
-                <img src="/video_feed" width={{setting.w}}>
+                <img src="/video_feed" class="img-fluid-center" width={{setting.w}}>
                 {% else %}
-                <img src="/static/img/no_video.png" width={{setting.w}}>
+                <img src="/static/img/no_video.png" class="img-fluid-center" width={{setting.w}}>
                 {% endif %}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div id="main_card" class="row">
                     <!-- BUTTON CONTROL -->
-                    <div class="col-md-12 mb-2">
+                    <div class="col-md-12 mb-6">
 <!--                        <select id="modes" class="custom-select mode-select">-->
 <!--                            <option value="" {% if setting.selected_mode is none %} selected="selected" {% endif %}>-mode-</option>-->
 <!--                            {% for item in setting.mode %}-->
@@ -28,12 +28,12 @@
                         {% else %}
                         <a id="cam-btn" href="/?camera=on&mode=" class="btn btn-primary" role="button" >Konveyörü Başlat</a>
                         {% endif %}
-        
+                    <div class="'col-md-12  mb-6">              
                         <button type="button" id="rst-btn" href="" class="btn btn-success" role="button" >Sayacı Sıfırla</a>
                     </div>
 
                     <!-- CARD TIME & FPS -->
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-12 mb-6">
                         <div class="card border-success text-center">
                             <h6 class="card-header">
                               Saat
@@ -43,10 +43,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-12 mb-6">
                         <div class="card border-success text-center">
                             <h6 class="card-header">
-                              FPS
+                              Tanıma Süresi
                             </h6>
                             <div class="card-body text-success">
                                 <h4 id="inference" class="card-text">0</h4>
@@ -63,10 +63,10 @@
 {% block script %}
 <script>
     var card_template = 
-        '<div class="col-md-3 mb-2 counter_card"> ' +
+        '<div class="col-md-12 mb-6 counter_card"> ' +
             '<div class="card border-success text-center"> ' +
                 '<div class="card-header">' +
-                    '<h6>&&</h6> ' +
+                    '<h16>&&</h16> ' +
                 '</div>' +
                 '<div class="card-body text-success"> ' +
                     '<h4 id="inference" class="card-text">%%</h4> ' +
@@ -75,7 +75,7 @@
         '</div> ';
 
     var spacing_template = 
-        '<div class="col-md-12 counter_card">' +
+        '<div class="col-md-15 counter_card">' +
             '<hr>' +
             '<h5>&&</h5>' +
         '</div>'

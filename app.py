@@ -2,13 +2,12 @@ from flask import Flask, render_template, Response, request, flash
 from flask_socketio import SocketIO
 from ultralytics import YOLO
 import cv2
-import json
-import numpy as np
+
 
 from core_service.stream import Stream
 from core_service.object_counter import Counter
 from core_service.detector import Detector
-from core_service.buzzer import Motor
+from core_service.motor import Motor
 # initialize flask & socketio
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'qwerty123'
@@ -44,13 +43,13 @@ def video_feed():
     return Response(stream.gen_frames(), 
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 #
-# @app.route("/model")
-# def model():
-#     return render_template("model.html")
-#
-# @app.route("/setting")
-# def setting():
-#     return render_template("setting.html")
+@app.route("/model")
+def model():
+    return render_template("model.html")
+
+@app.route("/setting")
+def setting():
+    return render_template("setting.html")
     
 @socketio.on('reset_counter')
 def handle_reset_counter(msg):
@@ -63,6 +62,9 @@ if __name__ == '__main__':
 
     model = YOLO("yolov8n.pt")
     classes = model.names
+    classes.update({80:'total'})
+    classes.update({81:'unidentified'})
+    classes.update({47:'orange'})        
     # initialize counter object
     lines = []
     lines.append([int(w*0.20), 0, int(w*0.20), h]) # LINE 0, x0, y0, x1, y1
@@ -78,7 +80,7 @@ if __name__ == '__main__':
     stream = Stream(cam, detector, counter, mot, socketio, classes)
 
     # initialize background task
-    socketio.start_background_task(target=detector.main)
+    #socketio.start_background_task(target=detector.main)
     socketio.start_background_task(target=mot.main)
     # run flask-socketio
     socketio.run(app, host="0.0.0.0")

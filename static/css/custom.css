@@ -1,16 +1,21 @@
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
+    font-size: 25px;
     color: rgba(255,255,255,.8);
+  
 }
 
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-text:hover {
+   
     color: #ffffff;
 }
 /* change the link color */
 .navbar-custom .nav .nav-item .nav-link {
     color: rgba(255,255,255,.8);
+    
+    
 }
 /* change the color of active or hovered links */
 .navbar-custom .nav-item:hover .nav-link {
@@ -24,22 +29,34 @@
 .alert-fixed {
     position:fixed; 
     top:10vh;
+    left: 50%;
     z-index:9999; 
-    transform: translate(45vw);
+    transform: translate(-50%);
 }
 .jumbotron {
-    padding: 2rem 2rem;
+    padding: 0.5rem 0.5rem;
+    justify-content: center;
+    
 }
 .mode-select{
-    width: 150px;
+    margin-left: 50%;
 }
 hr {
-    margin-top: 5px !important;
-    margin-bottom: 1px !important;
+    margin-top: 30px !important;
+    margin-bottom: 50px !important;
+    /*justify-content: center ;*/
+
 }
 .card-header {
-    padding: .25rem 1.25rem !important;
+    padding: 0.5rem 2rem !important;
+   
+    /*justify-content: center;*/
+    /*text-align: center !important;*/
 }
 .card-body {
-    padding: 0.5rem !important;
+    padding: 0.75rem !important;
+    
+    /*justify-content: center;*/
+
+    /*text-align: center !important;*/
 }

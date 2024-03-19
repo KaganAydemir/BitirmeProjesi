@@ -19,19 +19,20 @@ class Stream():
                 ret, frame = self.camera.read()
                 if not ret:
                     break
+                self.mot.detection_complete = False
                 if not self.mot.is_running:
-
                     frame = self.detector.detect_object(ret, frame)
-                    ret, buffer = cv2.imencode('.jpg', frame)
-                    frame = buffer.tobytes()
                     messages = []
-
+                    print("detection yapiliyo") 
                     # frame = self.counter.draw_line(frame)
                     for counter_object in self.counter.counter_objects:
                         msg = {}
                         for key in counter_object:
+                            #print(key)
                             if counter_object[key]['counter'] > 0:
                                 msg[self.classes[key]] = counter_object[key]['counter']
+                                #print(self.classes[key])
+                                print(msg[self.classes[key]])
                         messages.append(msg)
                     if len(messages) > 0:
                         # trigger buzzer & send counter to browser
@@ -42,6 +43,8 @@ class Stream():
                                 "messages": messages
                             })
                     self.mot.detection_complete = True
+                ret, buffer = cv2.imencode('.jpg', frame)
+                frame = buffer.tobytes()
                 if frame is None:
                     continue
                 yield (b'--frame\r\n'

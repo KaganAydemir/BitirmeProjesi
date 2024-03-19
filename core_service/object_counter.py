@@ -26,7 +26,7 @@ class Counter():
                                             'counter' : 0     
                                             }
             self.counter_objects.append(class_counter)
-            print(class_counter)
+
 
 
     def shortest_distance(self, x, y, line):  
@@ -78,7 +78,7 @@ class Counter():
                    "cell phone",
                    "microwave", "oven", "toaster", "sink", "refrigerator", "book", "clock", "vase",
                    "scissors",
-                   "teddy bear", "hair drier", "toothbrush"
+                   "teddy bear", "hair drier", "toothbrush","total","unidentified"
                    ]
         for r in results:
             boxe = r.boxes
@@ -99,7 +99,14 @@ class Counter():
                 # class name
 
                 cls = int(box.cls[0])
-                classIds.append(cls)
+                if cls==47:
+                    cls=49
+                if cls==52:
+                    cls=51
+                if confidence < 0.45 and not cls==64 and not cls==79 and not cls==51 and not cls==0:
+                    cls = 81
+                if not cls==0:    
+                    classIds.append(cls)
                 print("Class name -->", classes[cls])
                 # object details
                 org = [x1, y1]
@@ -109,7 +116,10 @@ class Counter():
                 thickness = 2
                 cv2.putText(frame, classes[cls], org, font, fontScale, color, thickness)
         for i in classIds:
+           
             self.counter_objects[0][i]['counter'] += 1
+            self.counter_objects[0][80]['counter'] +=1
+            
         return frame
 
     def draw_line(self, frame):

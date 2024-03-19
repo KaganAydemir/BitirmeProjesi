@@ -27,37 +27,7 @@ class Counter():
                                             }
             self.counter_objects.append(class_counter)
 
-
-
-    def shortest_distance(self, x, y, line):  
-        x1, y1, x2, y2 = line
-        dx = x2-x1
-        dy = y2-y1
-        m = np.sqrt(np.square(dx) + np.square(dy))
-        r = abs(dx*(y1-y) - (x1-x)*dy) / m 
-        return r
-
-    def counter_area(self, class_id):
-        if self.counter_objects[0][class_id]['frame_id'] == self.frame_id :
-            self.counter_objects[0][class_id]['counter'] += 1
-        else :
-            self.counter_objects[0][class_id]['counter'] = 1
-            self.counter_objects[0][class_id]['frame_id'] = self.frame_id
-
-    def counter_line_cross(self, class_id, x, y):
-        r = self.shortest_distance(x, y, self.lines[0])
-        if r < self.threshDist :
-            if self.counter_objects[0][class_id]['in'] == False :
-                self.counter_objects[0][class_id]['counter'] += 1
-            self.counter_objects[0][class_id]['in'] = True 
-        else :
-            self.counter_objects[0][class_id]['in'] = False
-
-
     def postprocess(self, results, frame):
-
-        # if self.counter_mode == 'area' :
-        #     self.set_null_counter()
         self.frame_id += 1
         print("object counter postprocess")
         classIds = []

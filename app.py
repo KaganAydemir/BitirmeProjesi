@@ -10,7 +10,7 @@ from core_service.detector import Detector
 from core_service.motor import Motor
 # initialize flask & socketio
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'qwerty123'
+app.config['SECRET_KEY'] = 'bitirme2'
 
 socketio = SocketIO()
 socketio.init_app(app)
@@ -67,9 +67,7 @@ if __name__ == '__main__':
     classes.update({47:'orange'})        
     # initialize counter object
     lines = []
-    lines.append([int(w*0.20), 0, int(w*0.20), h]) # LINE 0, x0, y0, x1, y1
-    #lines.append([int(w*0.80), 0, int(w*0.80), h]) # LINE 1, x0, y0, x1, y1
-    counter = Counter(classes, mode='line', lines=lines, threshDist = 30) #  mode='line', 'area', 'multiline'
+    counter = Counter(classes, mode='line', lines=lines, threshDist = 30) 
 
     # initialize model
     detector = Detector(counter, socketio, classes)
@@ -80,7 +78,6 @@ if __name__ == '__main__':
     stream = Stream(cam, detector, counter, mot, socketio, classes)
 
     # initialize background task
-    #socketio.start_background_task(target=detector.main)
     socketio.start_background_task(target=mot.main)
     # run flask-socketio
     socketio.run(app, host="0.0.0.0")

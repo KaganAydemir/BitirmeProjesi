@@ -91,13 +91,3 @@ class Counter():
             self.counter_objects[0][80]['counter'] +=1
             
         return frame
-
-    def draw_line(self, frame):
-        if self.counter_mode == 'line' :
-            x1, y1, x2, y2 = self.lines[0]
-            frame = cv2.line(frame, (x1, y1), (x2, y2 ), (255, 0, 255), 3)
-        elif self.counter_mode == 'multiline':
-            for line in self.lines :
-                x1, y1, x2, y2 = line
-                frame = cv2.line(frame, (x1, y1), (x2, y2 ), (255, 0, 255), 3)          
-        return frame

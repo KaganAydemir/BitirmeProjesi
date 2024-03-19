@@ -23,7 +23,7 @@ class Stream():
                 if not self.mot.is_running:
                     frame = self.detector.detect_object(ret, frame)
                     messages = []
-                    print("detection yapiliyo") 
+                    print("detection yapiliyor") 
                     # frame = self.counter.draw_line(frame)
                     for counter_object in self.counter.counter_objects:
                         msg = {}
